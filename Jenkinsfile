@@ -1,12 +1,10 @@
-node {
-    stage('Build') {
-        docker.image('node:16-buster-slim').withRun('-p 3200:3200') {
-            sh 'npm install'
+pipeline {
+    agent { docker { image 'maven:3.9.3-eclipse-temurin-17-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
         }
     }
-    stage('Test') {
-        docker.image('node:16-buster-slim').withRun('-p 3200:3200') {
-            sh './jenkins/scripts/test.sh'
-        }
-    }
-    
+}
