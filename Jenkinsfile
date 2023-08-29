@@ -9,6 +9,10 @@ node {
             sh 'mvn test'
             junit 'target/surefire-reports/*.xml'
          }     
+         stage('Deploy') { 
+            sh './jenkins/scripts/deliver.sh' 
+            input message: 'Lanjutkan ke tahap Deploy?
+	    sleep 60
         }    
     }
-     
+}
